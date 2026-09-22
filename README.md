@@ -277,7 +277,7 @@ you'll basically need to run OpenSSL's c_rehash command in this directory.
 * Context: `ldap_server` block
 
 LDAP library default is on. This option disables usage of referral messages from
-LDAP server. Usefull for authenticating against read only AD server without access
+LDAP server. Useful for authenticating against read only AD server without access
 to read write.
 
 ### attribute_header_prefix

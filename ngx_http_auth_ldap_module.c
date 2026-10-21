@@ -2029,6 +2029,7 @@ ngx_http_auth_ldap_read_handler(ngx_event_t *rev)
                     if (ber != NULL) {
                         ber_free(ber, 0);
                     }
+                    ngx_http_auth_ldap_reply_connection(c, 0, NULL);
                 } else if (ldap_msgtype(result) == LDAP_RES_SEARCH_RESULT) {
                     ngx_log_error(NGX_LOG_INFO, c->log, 0, "ngx_http_auth_ldap_read_handler: Cnx[%d] Received search result (%d: %s [%s])",
                         c->cnx_idx, error_code, ldap_err2string(error_code), error_msg ? error_msg : "-");
@@ -2525,6 +2526,7 @@ ngx_http_auth_ldap_authenticate(ngx_http_request_t *r, ngx_http_auth_ldap_ctx_t 
 
     if (r->connection->write->timedout) {
         ngx_log_error(NGX_LOG_ERR, r->connection->log, 0, "ngx_http_auth_ldap_authenticate: Authentication timed out");
+	r->connection->write->timedout = 0;
         if (ctx->c != NULL) {
             if (ctx->server && ctx->server->clean_on_timeout) {
                 // Authentication response timeouted => Close and clean the corresponding LDAP connection
@@ -2546,7 +2548,7 @@ ngx_http_auth_ldap_authenticate(ngx_http_request_t *r, ngx_http_auth_ldap_ctx_t 
             ngx_queue_remove(&ctx->queue);
         }
 
-        return NGX_ERROR;
+        return 401;
     }
 
     /*

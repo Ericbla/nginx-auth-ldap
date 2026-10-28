@@ -270,6 +270,27 @@ Trust all CA certificates in this directory (see ssl_check_cert above).
 Note that you need to provide hash-based symlinks in the directory for this to work;
 you'll basically need to run OpenSSL's c_rehash command in this directory.
 
+### ssl_protocols
+
+* Syntax: ssl_protocols _list-of-tls-protocols_;
+* Default: TLSv1.2;
+* Context: `ldap_server` block
+
+Specify the list of TLS protocols that can be used for LDAPs connections.
+
+Note the list is a space or comma separated Nginx protocol names (TLSv1|TLSv1.1|TLSv1.2|TLSv1.3). like the one used in the `ssl_protocols` Nginx directive
+
+### ssl_ciphers
+
+* Syntax: ssl_ciphers _list of supported or not supported ciphers_;
+* Default: --;
+* Context: `ldap_server` block
+
+Specify the list of TLS ciphers.
+
+Note the list column separated OpenSSL ciphers commands. like the one used in the `ssl_ciphers` Nginx directive. by default Nginx uses: `"HIGH:!aNULL:!MD5"`
+
+
 ### referral
 
 * Syntax: referral on | off;

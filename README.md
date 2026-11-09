@@ -6,7 +6,16 @@ LDAP module for nginx which supports authentication against multiple LDAP server
 
 This project is a clone of [nginx-auth-ldap](https://github.com/kvspb/nginx-auth-ldap)  original module from [kvspb](https://github.com/kvspb).
 
-The reasons for this fork are:
+### !!! WARNING
+
+Since beginging of November 2026 the parent project have restarted the development and provided the first official releases 1.0.0 .. 1.2.0.
+It added all the features and fixes provided in this fork and the code base structure is now very different.
+
+I strongly advise now to use the original module from [kvspb](https://github.com/kvspb)
+
+This forked project should be considered **obsolete** now.
+
+The reasons for this fork were:
 
 * The original project seems abondonned (no commit since 2 years).
 * Inherit from other contributors fixes/features:
@@ -289,7 +298,6 @@ Note the list is a space or comma separated Nginx protocol names (TLSv1|TLSv1.1|
 Specify the list of TLS ciphers.
 
 Note the list column separated OpenSSL ciphers commands. like the one used in the `ssl_ciphers` Nginx directive. by default Nginx uses: `"HIGH:!aNULL:!MD5"`
-
 
 ### referral
 
